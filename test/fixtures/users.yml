@@ -1,15 +1,14 @@
 # == Schema Information
 #
-# Table name: auctions
+# Table name: users
 #
-#  id            :integer          not null, primary key
-#  title         :string(255)      not null
-#  bid_increment :decimal(, )      default(0.0)
-#  end_date      :datetime         not null
-#  active        :boolean          default(TRUE)
-#  user_id       :integer
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id                 :integer          not null, primary key
+#  fname              :string(255)
+#  lname              :string(255)
+#  username           :string(255)
+#  encrypted_password :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

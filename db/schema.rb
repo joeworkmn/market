@@ -11,17 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303103600) do
+ActiveRecord::Schema.define(version: 20140303120113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "auctions", force: true do |t|
-    t.string   "title",                     null: false
-    t.decimal  "increment",  default: 0.0
-    t.datetime "end_date",                  null: false
-    t.boolean  "active",     default: true
+    t.string   "title",                        null: false
+    t.decimal  "bid_increment", default: 0.0
+    t.datetime "end_date",                     null: false
+    t.boolean  "active",        default: true
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bids", force: true do |t|
+    t.decimal  "amount",     null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "auction_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "username"
+    t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

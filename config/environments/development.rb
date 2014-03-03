@@ -28,7 +28,7 @@ Market::Application.configure do
   config.assets.debug = true
 end
 
-silence_warnings do
-   require 'pry'
-   IRB = Pry
-end
+#silence_warnings do
+#   require 'pry'
+#   IRB = Pry
+#end
