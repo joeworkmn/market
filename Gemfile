@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
+#gem 'bcrypt'
 
 # After install: rails g foundation:install
 gem 'zurb-foundation'
@@ -46,17 +47,18 @@ group :development, :test do
 end
 
 group :test do
-   gem 'capybara'
-   gem 'capybara_minitest_spec'
+   #gem 'capybara'
+   #gem 'capybara_minitest_spec'
+   gem 'minitest-spec-rails'
    gem 'database_cleaner'
    gem 'factory_girl_rails'
-   gem 'minitest-metadata'
-   gem 'minitest-reporters'
+   #gem 'minitest-metadata'
+   #gem 'minitest-reporters'
    gem 'mocha', require: false
    gem 'poltergeist'
-   gem 'selenium-webdriver'
+   #gem 'selenium-webdriver'
    gem 'shoulda'
-   gem 'turn'
+   #gem 'turn'
 end
 
 group :doc do
