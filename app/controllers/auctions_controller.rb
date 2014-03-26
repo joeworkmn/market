@@ -11,6 +11,9 @@
 #
 class AuctionsController < ApplicationController
 
+   before_action :must_be_signed_in
+   before_action :must_be_auction_owner, only: [:edit, :update]
+
    def new
       @auction = Auction.new
    end
@@ -26,6 +29,19 @@ class AuctionsController < ApplicationController
       end
    end
 
+   def edit
+      auction
+   end
+
+   def update
+      if auction.update(auction_params)
+         flash[:success] = "Auction has been updated."
+         redirect_to edit_auction_path
+      else
+         flash[:alert] = "Error has occurred."
+         render 'edit'
+      end
+   end
 
 
 
@@ -34,6 +50,10 @@ class AuctionsController < ApplicationController
    def auction_params 
       params.require(:auction)
             .permit(:title, :start_bid, :buy_out, :bid_increment, :end_date, :active)
+   end
+
+   def auction
+      @auction ||= Auction.find_by(id: params[:id])
    end
 
 end
