@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require foundation
 //= require dataTables/jquery.dataTables
+//= require global
 // require turbolinks
 //= require_tree .
 

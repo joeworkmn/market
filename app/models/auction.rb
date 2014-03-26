@@ -10,9 +10,29 @@
 #  user_id       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  start_bid     :decimal(, )
+#  buy_out       :decimal(, )
 #
 
 class Auction < ActiveRecord::Base
    has_many :bids
    belongs_to :owner, class_name: User
+
+   validates :title, presence: true
+   validates :end_date, presence: true
+   validates :bid_increment, numericality: true, allow_blank: true
+   validates :start_bid, numericality: true, allow_blank: true
+   validates :buy_out, numericality: true, allow_blank: true
+
+   validate :buy_out_must_be_more_than_start_bid
+
+
+   private
+
+   # Custom validation method
+   def buy_out_must_be_more_than_start_bid
+      if buy_out <= start_bid
+         errors.add(:buy_out, "must be greater than the starting bid")
+      end
+   end
 end

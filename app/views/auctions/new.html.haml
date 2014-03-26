@@ -1,0 +1,13 @@
+= provide(:title, "New Auction")
+
+%h3.text-center Create a New Auction
+
+.large-4.columns
+  = simple_form_for @auction do |f|
+    = f.input :title
+    = f.input :start_bid
+    = f.input :bid_increment
+    = f.input :buy_out
+    = f.input :end_date do 
+      = f.text_field :end_date, :class => "datefield"
+    = f.submit value: "Create auction", :class => "button"
