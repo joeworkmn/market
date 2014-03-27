@@ -1,0 +1,9 @@
+%h3.subheader= @auction.title
+
+%ul.vcard
+  %li= "Starting bid: " + number_to_currency(@auction.start_bid)
+  %li= "Buy out: " + number_to_currency(@auction.buy_out)
+  %li= "Bid increment: " + number_to_currency(@auction.bid_increment)
+
+= simple_form_for :bid, "#" do |f|
+  = f.button
