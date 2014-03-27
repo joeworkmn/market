@@ -1,9 +1,18 @@
 %h3.subheader= @auction.title
 
-%ul.vcard
+%ul.vcard.auction-info
+  %li= "Owner: " + @auction.owner.name
   %li= "Starting bid: " + number_to_currency(@auction.start_bid)
   %li= "Buy out: " + number_to_currency(@auction.buy_out)
   %li= "Bid increment: " + number_to_currency(@auction.bid_increment)
+  %li= "End date: #{@auction.end_date}"
 
-= simple_form_for :bid, "#" do |f|
-  = f.button
+= form_for [@auction, @bid] do |f|
+  = f.hidden_field :amount, value: @auction.bid_increment
+  = f.submit "Place a bid of: #{number_to_currency(@auction.bid_increment)}", :class => "button"
+
+%h4.subheader Or enter the amount you want:
+
+= simple_form_for [@auction, @bid] do |f|
+  = f.input :amount, label: false, input_html: {placeholder: "Enter your bid."}
+  = f.submit "Place bid", :class => "button"

@@ -1,7 +1,8 @@
 Market::Application.routes.draw do
-  resources :bids
   resources :users
-  resources :auctions
+  resources :auctions do
+     resources :bids
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signin', to: 'sessions#new'

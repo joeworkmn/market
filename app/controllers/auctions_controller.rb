@@ -21,6 +21,7 @@ class AuctionsController < ApplicationController
 
    def show
       auction
+      @bid = Bid.new
    end
 
    def new

@@ -16,7 +16,7 @@
 
 class Auction < ActiveRecord::Base
    has_many :bids, dependent: :destroy
-   belongs_to :owner, class_name: User
+   belongs_to :owner, class_name: "User", foreign_key: "user_id"
 
    validates :title, presence: true
    validates :end_date, presence: true
