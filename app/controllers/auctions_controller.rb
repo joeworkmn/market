@@ -19,6 +19,7 @@ class AuctionsController < ApplicationController
       @auctions = Auction.paginate(page: params[:page])
    end
 
+   # TODO Add buyout button or link.
    def show
       auction
       @bid = Bid.new

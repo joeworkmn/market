@@ -1,9 +1,10 @@
 class BidsController < ApplicationController
 
-
+   # TODO Handle buyouts.
    def create
       @auction = Auction.find_by(id: params[:auction_id])
       @bid = current_user.bids.build(bid_params)
+      @bid.amount += @auction.high_bid if params[:is_increment]
       @bid.auction_id = params[:auction_id]
       if @bid.save
          flash[:success] = "Your bid has been placed."
@@ -19,6 +20,6 @@ class BidsController < ApplicationController
    private
 
    def bid_params
-      params.require(:bid).permit(:amount, :auction_id)
+      params.require(:bid).permit(:amount, :auction_id, :is_increment)
    end
 end

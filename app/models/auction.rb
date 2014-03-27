@@ -29,6 +29,14 @@ class Auction < ActiveRecord::Base
    default_scope -> { order("created_at DESC") }
 
 
+   def high_bid
+      bids.maximum(:amount)
+   end
+
+   def high_bidder
+      bids.order("amount DESC").first.user
+   end
+
    private
 
    # Custom validation method
