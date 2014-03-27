@@ -29,13 +29,22 @@ class Auction < ActiveRecord::Base
    default_scope -> { order("created_at DESC") }
 
 
+   def has_bids?
+      (bids.size > 0)
+   end
+
    def high_bid
-      bids.maximum(:amount)
+      if has_bids?
+         bids.maximum(:amount) 
+      else
+         0
+      end
    end
 
    def high_bidder
-      bids.order("amount DESC").first.user
+      bids.order("amount DESC").first.user if has_bids?
    end
+
 
    private
 

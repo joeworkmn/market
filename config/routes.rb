@@ -1,6 +1,7 @@
 Market::Application.routes.draw do
   resources :users
   resources :auctions do
+     get 'buyout', on: :member
      resources :bids
   end
   resources :sessions, only: [:new, :create, :destroy]

@@ -19,7 +19,6 @@ class AuctionsController < ApplicationController
       @auctions = Auction.paginate(page: params[:page])
    end
 
-   # TODO Add buyout button or link.
    def show
       auction
       @bid = Bid.new
@@ -51,6 +50,18 @@ class AuctionsController < ApplicationController
       else
          flash[:alert] = "Error has occurred."
          render 'edit'
+      end
+   end
+
+   def buyout
+      @bid = current_user.bids.build
+      @bid.amount = auction.buy_out ; @bid.auction_id = params[:id]
+      if @bid.save
+         flash[:success] = "You have won the auction!"
+         redirect_to auction
+      else
+         flash[:alert] = "Error has occured."
+         render :show
       end
    end
 
