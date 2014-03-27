@@ -1,0 +1,12 @@
+$grayMediumLight: #eaeaea;
+$grayLight: darken($grayMediumLight, 10%);
+
+.collection-list {
+   list-style: none;
+   > li {
+      margin-left: -20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid $grayLight;
+   }
+}
+      

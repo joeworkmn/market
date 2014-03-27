@@ -1,0 +1,14 @@
+%table
+  %thead
+    %tr
+      %th
+        Title
+      %th
+        Starting Bid
+      %th
+        Buy Out
+      %th
+        End Date
+  %tbody
+    = render @auctions
+= will_paginate @auctions

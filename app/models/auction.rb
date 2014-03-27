@@ -15,7 +15,7 @@
 #
 
 class Auction < ActiveRecord::Base
-   has_many :bids
+   has_many :bids, dependent: :destroy
    belongs_to :owner, class_name: User
 
    validates :title, presence: true
@@ -25,6 +25,8 @@ class Auction < ActiveRecord::Base
    validates :buy_out, numericality: true, allow_blank: true
 
    validate :buy_out_must_be_more_than_start_bid
+
+   default_scope -> { order("created_at DESC") }
 
 
    private

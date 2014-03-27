@@ -14,6 +14,11 @@ class AuctionsController < ApplicationController
    before_action :must_be_signed_in
    before_action :must_be_auction_owner, only: [:edit, :update]
 
+
+   def index
+      @auctions = Auction.paginate(page: params[:page])
+   end
+
    def new
       @auction = Auction.new
    end

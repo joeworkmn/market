@@ -32,7 +32,7 @@ gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'watu_table_builder', require: 'table_builder'
-gem 'will_paginate', '3.0.3'
+gem 'will_paginate', '~> 3.0'
 
 group :development do
    gem 'annotate', ">=2.5.0"

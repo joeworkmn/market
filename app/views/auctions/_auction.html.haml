@@ -1,0 +1,9 @@
+%tr
+  %td
+    %h5.subheader= link_to auction.title, auction
+  %td
+    %h5.subheader= number_to_currency(auction.start_bid)
+  %td
+    %h5.subheader= number_to_currency(auction.buy_out)
+  %td
+    %h6.subheader= auction.end_date

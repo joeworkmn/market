@@ -12,8 +12,8 @@
 #
 
 class User < ActiveRecord::Base
-   has_many :auctions
-   has_many :bids
+   has_many :auctions, dependent: :destroy
+   has_many :bids, dependent: :destroy
 
    has_secure_password
 
