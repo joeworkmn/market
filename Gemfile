@@ -40,6 +40,7 @@ group :development do
    gem 'binding_of_caller'
    gem 'byebug'
    gem 'pry'
+   gem 'pry-rails'
    gem 'thin'
 end
 
