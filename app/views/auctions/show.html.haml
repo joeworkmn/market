@@ -1,21 +1,28 @@
 %h3.subheader= @auction.title
 
-.row
-  .large-5.columns
-    = render 'auctions/auction_info'
-  .large-7.columns
-    .row
-      .large-2.columns
-        = link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
-      .large-2.columns
-        .label.success.high-bid
-          %p= "High Bid: #{number_to_currency(@auction.high_bid)}"
-          %p= @auction.high_bidder.name if @auction.has_bids?
+- if @auction.active?
+  .row
+    .large-5.columns
+      = render 'auctions/auction_info'
+    .large-7.columns
+      .row
+        .large-2.columns
+          = link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
+        .large-2.columns
+          .label.success.high-bid
+            %p= "High Bid: #{number_to_currency(@auction.high_bid)}"
+            %p= @auction.high_bidder.name if @auction.has_bids?
 
-    .row
-      .large-7.columns
-        = render 'auctions/bid_increment_button'
+      .row
+        .large-7.columns
+          = render 'auctions/bid_increment_button'
 
-.row
-  .large-3.columns
-    = render 'auctions/bid_form'
+  .row
+    .large-3.columns
+      = render 'auctions/bid_form'
+- else
+  .row
+    .large-5.columns
+      = render 'auctions/auction_info'
+    .label.alert
+      Closed

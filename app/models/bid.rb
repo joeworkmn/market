@@ -17,25 +17,29 @@ class Bid < ActiveRecord::Base
    validates :amount, presence: true, numericality: true
    validates :user_id, presence: true
    validates :auction_id, presence: true
-   validate  :must_be_atleast_start_bid_amount
-   validate  :must_be_atleast_the_sum_of_high_bid_and_bid_increment
-   # TODO Might need to add a "buyout state" to this model so it knows when someone is using the buyout option.
-   # TODO Add validation to check if bid is >= buyout price. If it is, add error message that tells the user to click the "buyout button" instead.
+   validate  :must_be_at_least_start_bid_amount
+   validate  :must_meet_the_bid_increment
+
+   before_save :block_unless_auction_active
 
 
    private
 
-   def must_be_atleast_start_bid_amount
+   def must_be_at_least_start_bid_amount
       if amount < auction.start_bid
          errors.add(:amount, "must be at least the starting bid amount")
       end
    end
 
-   def must_be_atleast_the_sum_of_high_bid_and_bid_increment
+   def must_meet_the_bid_increment
       min_amount = auction.high_bid + auction.bid_increment
       if amount < min_amount
          errors.add(:amount, "must meet the bid increment or more")
       end
+   end
+
+   def block_unless_auction_active
+      return false unless self.auction.active?
    end
 
 end

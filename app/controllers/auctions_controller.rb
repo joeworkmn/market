@@ -54,9 +54,9 @@ class AuctionsController < ApplicationController
    end
 
    def buyout
-      @bid = current_user.bids.build
-      @bid.amount = auction.buy_out ; @bid.auction_id = params[:id]
-      if @bid.save
+      @bid = auction.bids.build(amount: auction.buy_out, user_id: current_user.id)
+      auction.active = false
+      if auction.save
          flash[:success] = "You have won the auction!"
          redirect_to auction
       else

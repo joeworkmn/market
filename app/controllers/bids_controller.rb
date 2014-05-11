@@ -1,12 +1,11 @@
 class BidsController < ApplicationController
 
-   # TODO Handle buyouts.
    def create
       @auction = Auction.find_by(id: params[:auction_id])
       @bid = current_user.bids.build(bid_params)
       @bid.auction_id = params[:auction_id]
       handle_increments
-      redirect_to buyout_auction_path(@auction) and return if amount_reached_buyout?
+      redirect_to buyout_auction_path(@auction) and return if buyout_reached?
       if @bid.save
          flash[:success] = "Your bid has been placed."
          redirect_to @auction
@@ -28,7 +27,8 @@ class BidsController < ApplicationController
       @bid.amount += @auction.high_bid if params[:is_increment]
    end
 
-   def amount_reached_buyout?
+   # bid amount reached buyout?
+   def buyout_reached?
       @bid.amount >= @auction.buy_out
    end
 end

@@ -28,7 +28,6 @@ class Auction < ActiveRecord::Base
 
    default_scope -> { order("created_at DESC") }
 
-
    def has_bids?
       (bids.size > 0)
    end
@@ -43,6 +42,11 @@ class Auction < ActiveRecord::Base
 
    def high_bidder
       bids.order("amount DESC").first.user if has_bids?
+   end
+
+   # Open or Closed
+   def status
+      self.active? ? "OPEN" : "CLOSED"
    end
 
 
