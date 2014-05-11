@@ -1,0 +1,5 @@
+%h4.subheader Enter your bid:
+
+= simple_form_for [@auction, @bid] do |f|
+  = f.input :amount, label: false, input_html: {placeholder: "Enter your bid."}
+  = f.submit "Place bid", :class => "button"

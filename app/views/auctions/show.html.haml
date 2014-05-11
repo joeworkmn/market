@@ -2,34 +2,20 @@
 
 .row
   .large-5.columns
-    %ul.vcard.auction-info
-      %li= "Owner: " + @auction.owner.name
-      %li= "Starting bid: " + number_to_currency(@auction.start_bid)
-      %li= "Buyout: " + number_to_currency(@auction.buy_out)
-      %li= "Bid increment: " + number_to_currency(@auction.bid_increment)
-      %li= "End date: #{@auction.end_date}"
-      %li= "High bid: #{number_to_currency(@auction.high_bid)}"
-      %li= "High bidder: #{@auction.high_bidder.name}" if @auction.has_bids?
+    = render 'auctions/auction_info'
   .large-7.columns
-    .label.success.high-bid
-      = "High Bid: #{number_to_currency(@auction.high_bid)}"
+    .row
+      .large-2.columns
+        = link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
+      .large-2.columns
+        .label.success.high-bid
+          %p= "High Bid: #{number_to_currency(@auction.high_bid)}"
+          %p= @auction.high_bidder.name if @auction.has_bids?
 
-= link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
+    .row
+      .large-7.columns
+        = render 'auctions/bid_increment_button'
 
-= form_for [@auction, @bid] do |f|
-  / flag to let controller know the bid is coming from the increment button.
-  = hidden_field_tag :is_increment, value: true
-  - if @auction.high_bid >= @auction.start_bid
-    = f.hidden_field :amount, value: @auction.bid_increment
-    = f.submit "Place a bid of: #{number_to_currency(@auction.bid_increment + @auction.high_bid)}", :class => "button"
-  - else
-    = f.hidden_field :amount, value: @auction.start_bid
-    = f.submit "Place starting bid", :class => "button"
-
-
-
-%h4.subheader Or enter the amount you want:
-
-= simple_form_for [@auction, @bid] do |f|
-  = f.input :amount, label: false, input_html: {placeholder: "Enter your bid."}
-  = f.submit "Place bid", :class => "button"
+.row
+  .large-3.columns
+    = render 'auctions/bid_form'

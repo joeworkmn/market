@@ -1,0 +1,9 @@
+= form_for [@auction, @bid] do |f|
+  / flag to let controller know the bid is coming from the increment button.
+  = hidden_field_tag :is_increment, value: true
+  - if @auction.high_bid >= @auction.start_bid
+    = f.hidden_field :amount, value: @auction.bid_increment
+    = f.submit "Place a bid of: #{number_to_currency(@auction.bid_increment + @auction.high_bid)}", :class => "button"
+  - else
+    = f.hidden_field :amount, value: @auction.start_bid
+    = f.submit "Place starting bid", :class => "button"

@@ -1,0 +1,8 @@
+%ul.vcard.auction-info
+  %li= "Owner: " + @auction.owner.name
+  %li= "Starting bid: " + number_to_currency(@auction.start_bid)
+  %li= "Buyout: " + number_to_currency(@auction.buy_out)
+  %li= "Bid increment: " + number_to_currency(@auction.bid_increment)
+  %li= "End date: #{@auction.end_date}"
+  %li= "High bid: #{number_to_currency(@auction.high_bid)}"
+  %li= "High bidder: #{@auction.high_bidder.name}" if @auction.has_bids?
