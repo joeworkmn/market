@@ -2,7 +2,7 @@ class BidsController < ApplicationController
 
    def create
       bid_handler = BidHandler.new
-      @auction = bid_handler.run(current_user, auction, params)
+      @auction = bid_handler.run(current_user, params)
       @bid = bid_handler.bid
 
       if @auction.save

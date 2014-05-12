@@ -5,8 +5,8 @@ class BidHandler
    def initialize
    end
 
-   def run(user, auction, params)
-      self.auction = auction
+   def run(user, params)
+      self.auction =  Auction.find_by(id: params[:auction_id])
       self.bid = auction.bids.build(amount: params[:bid][:amount], user_id: user.id)
 
       if buyout_reached?

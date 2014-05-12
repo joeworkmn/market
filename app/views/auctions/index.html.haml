@@ -1,18 +1,13 @@
 - provide(:title, "Auction Index")
 
-%h3.subheader.text-center Open Auctions
+%h3.subheader.text-center All Auctions
 
-%table
+%table.display.data-tables
   %thead
     %tr
-      %th
-        Title
-      %th
-        Starting Bid
-      %th
-        Buy Out
-      %th
-        End Date
+      %th Title
+      %th Starting Bid
+      %th Buy Out
+      %th End Date
   %tbody
     = render @auctions
-= will_paginate @auctions

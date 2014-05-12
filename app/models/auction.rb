@@ -23,7 +23,6 @@ class Auction < ActiveRecord::Base
    validates :bid_increment, numericality: true, allow_blank: true
    validates :start_bid, numericality: true, allow_blank: true
    validates :buy_out, numericality: true, allow_blank: true
-
    validate :buy_out_must_be_more_than_start_bid
 
    default_scope -> { order("created_at DESC") }
