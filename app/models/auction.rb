@@ -29,7 +29,7 @@ class Auction < ActiveRecord::Base
    default_scope -> { order("created_at DESC") }
 
    def has_bids?
-      (bids.size > 0)
+      bids.delete_if { |b| b.new_record? }.any?
    end
 
    def high_bid

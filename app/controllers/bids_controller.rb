@@ -1,13 +1,13 @@
 class BidsController < ApplicationController
 
    def create
-      @auction = Auction.find_by(id: params[:auction_id])
-      @bid = current_user.bids.build(bid_params)
-      @bid.auction_id = params[:auction_id]
-      handle_increments
-      redirect_to buyout_auction_path(@auction) and return if buyout_reached?
-      if @bid.save
+      bid_handler = BidHandler.new
+      @auction = bid_handler.run(current_user, auction, params)
+      @bid = bid_handler.bid
+
+      if @auction.save
          flash[:success] = "Your bid has been placed."
+         flash[:success] = "You have won the auction." unless @auction.active?
          redirect_to @auction
       else
          flash.now[:alert] = "Error has occured."
@@ -16,19 +16,13 @@ class BidsController < ApplicationController
    end
 
 
-
    private
 
+   def auction
+      @auction ||= Auction.find_by(id: params[:auction_id])
+   end
+
    def bid_params
-      params.require(:bid).permit(:amount, :auction_id, :is_increment)
-   end
-
-   def handle_increments
-      @bid.amount += @auction.high_bid if params[:is_increment]
-   end
-
-   # bid amount reached buyout?
-   def buyout_reached?
-      @bid.amount >= @auction.buy_out
+      params.require(:bid).permit(:amount)
    end
 end

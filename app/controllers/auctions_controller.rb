@@ -53,18 +53,6 @@ class AuctionsController < ApplicationController
       end
    end
 
-   def buyout
-      @bid = auction.bids.build(amount: auction.buy_out, user_id: current_user.id)
-      auction.active = false
-      if auction.save
-         flash[:success] = "You have won the auction!"
-         redirect_to auction
-      else
-         flash[:alert] = "Error has occured."
-         render :show
-      end
-   end
-
 
 
    private

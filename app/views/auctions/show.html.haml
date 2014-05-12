@@ -7,7 +7,8 @@
     .large-7.columns
       .row
         .large-2.columns
-          = link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
+          = render 'auctions/buyout_button'
+          /= link_to "Buyout", buyout_auction_path(@auction), :class => 'button alert'
         .large-2.columns
           .label.success.high-bid
             %p= "High Bid: #{number_to_currency(@auction.high_bid)}"
