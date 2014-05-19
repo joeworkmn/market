@@ -48,6 +48,10 @@ class Auction < ActiveRecord::Base
       self.active? ? "OPEN" : "CLOSED"
    end
 
+   def close
+      self.active = false
+   end
+
 
    private
 

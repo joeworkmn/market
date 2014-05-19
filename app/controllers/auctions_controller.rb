@@ -16,7 +16,7 @@ class AuctionsController < ApplicationController
 
 
    def index
-      @auctions = Auction.paginate(page: params[:page])
+      @auctions = Auction.all
    end
 
    def show

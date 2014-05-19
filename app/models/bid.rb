@@ -21,25 +21,34 @@ class Bid < ActiveRecord::Base
    validate  :must_meet_the_bid_increment
 
    before_save :block_unless_auction_active
+   before_save :handle_buyouts
 
 
    private
 
    def must_be_at_least_start_bid_amount
       if amount < auction.start_bid
-         errors.add(:amount, "must be at least the starting bid amount")
+         errors.add(:amount, "Must be at least the starting bid amount")
       end
    end
 
    def must_meet_the_bid_increment
       min_amount = auction.high_bid + auction.bid_increment
       if amount < min_amount
-         errors.add(:amount, "must meet the bid increment or more")
+         errors.add(:amount, "Must meet the bid increment or more")
       end
    end
 
    def block_unless_auction_active
       return false unless self.auction.active?
+   end
+
+   def handle_buyouts
+      if amount >= auction.buy_out
+         self.amount = auction.buy_out
+         auction.close
+         auction.save
+      end
    end
 
 end

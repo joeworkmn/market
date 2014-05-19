@@ -1,14 +1,16 @@
 class BidsController < ApplicationController
 
    def create
-      bid_handler = BidHandler.new
-      @auction = bid_handler.run(current_user, params)
-      @bid = bid_handler.bid
+      #bid_handler = BidHandler.new
+      #@auction = bid_handler.run(current_user, params)
+      #@bid = bid_handler.bid
+      
+      @bid = auction.bids.build(amount: params[:bid][:amount], user_id: current_user.id)
 
-      if @auction.save
+      if @bid.save
          flash[:success] = "Your bid has been placed."
-         flash[:success] = "You have won the auction." unless @auction.active?
-         redirect_to @auction
+         flash[:success] = "You have won the auction." unless auction.reload.active?
+         redirect_to auction
       else
          flash.now[:alert] = "Error has occured."
          render 'auctions/show'
