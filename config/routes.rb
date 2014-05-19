@@ -1,4 +1,8 @@
 Market::Application.routes.draw do
+  resources :conversation_messages
+
+  resources :conversations
+
   resources :users
   resources :auctions do
      get 'buyout', on: :member

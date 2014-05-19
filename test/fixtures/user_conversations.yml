@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: user_conversations
+#
+#  id              :integer          not null, primary key
+#  user_id         :integer
+#  conversation_id :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  belongs_to: 
+  belongs_to: 
+
+two:
+  belongs_to: 
+  belongs_to: 

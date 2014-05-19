@@ -6,6 +6,7 @@ FactoryGirl.define do
    factory :auction do
       title  'auction1'
    end
+
 end
 
 

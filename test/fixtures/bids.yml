@@ -3,7 +3,7 @@
 # Table name: bids
 #
 #  id         :integer          not null, primary key
-#  amount     :decimal(, )      not null
+#  amount     :decimal(, )      default(0.0), not null
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
