@@ -13,12 +13,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'faker', '1.1.2'
 
-# After install: rails g figaro:install
-gem 'figaro'
-gem 'gon'
 gem 'haml'
 gem 'haml-rails'
-gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -31,19 +27,18 @@ gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 gem 'validates_timeliness', '~> 3.0'
-gem 'watu_table_builder', require: 'table_builder'
 gem 'will_paginate', '~> 3.0'
 
 group :development do
    gem 'annotate', ">=2.5.0"
    gem 'better_errors'
    gem 'binding_of_caller'
-   gem 'byebug'
    gem 'pry'
    gem 'pry-rails'
    gem 'pry-nav'
    gem 'pry-stack_explorer'
    gem 'thin'
+   gem 'bullet'
 end
 
 group :development, :test do

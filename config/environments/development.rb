@@ -26,7 +26,21 @@ Market::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Bullet config
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    #Bullet.growl = true
+    Bullet.rails_logger = true
+    Bullet.bugsnag = true
+    Bullet.airbrake = true
+    Bullet.add_footer = true
+  end
 end
+
 
 #silence_warnings do
 #   require 'pry'

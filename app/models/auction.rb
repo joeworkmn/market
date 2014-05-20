@@ -27,6 +27,7 @@ class Auction < ActiveRecord::Base
 
    default_scope -> { order("created_at DESC") }
 
+   # checks only persisted bids.
    def has_bids?
       bids.delete_if { |b| b.new_record? }.any?
    end
@@ -52,10 +53,14 @@ class Auction < ActiveRecord::Base
       self.active = false
    end
 
+   def open
+      self.active = true
+   end
+
 
    private
 
-   # Custom validation method
+   # validation
    def buy_out_must_be_more_than_start_bid
       if buy_out <= start_bid
          errors.add(:buy_out, "must be greater than the starting bid")
