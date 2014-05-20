@@ -4,7 +4,44 @@ end
 
 FactoryGirl.define do
    factory :auction do
-      title  'auction1'
+      sequence(:title) { |n| "auction#{n}" }
+      start_bid     50
+      bid_increment 10
+      buy_out       100
+      end_date      { 5.days.from_now }
+      association :owner, factory: :user
+
+      factory :auction_with_bid do
+         after(:create) do |auction, eval|
+            FactoryGirl.create(:bid, auction: auction)
+         end
+      end
+
+   end
+
+
+   factory :bid do
+      amount 50
+      association :auction
+      association :user
+
+      factory :buyout_bid do
+         amount { auction.buy_out }
+      end
+
+      factory :over_buyout_bid do
+         amount { auction.buy_out + 10 }
+      end
+
+   end
+
+
+   factory :user do
+      fname                 { Faker::Name::first_name }
+      lname                 { Faker::Name::last_name }
+      sequence(:username)   { |n| "user#{n}" } 
+      password              'password'
+      password_confirmation 'password'
    end
 
 end

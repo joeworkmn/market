@@ -41,6 +41,8 @@ group :development do
    gem 'byebug'
    gem 'pry'
    gem 'pry-rails'
+   gem 'pry-nav'
+   gem 'pry-stack_explorer'
    gem 'thin'
 end
 

@@ -144,8 +144,13 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-nav (0.2.3)
+      pry (~> 0.9.10)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -245,7 +250,9 @@ DEPENDENCIES
   poltergeist
   polyamorous
   pry
+  pry-nav
   pry-rails
+  pry-stack_explorer
   rails (= 4.0.3)
   ransack!
   sass-rails (~> 4.0.0.rc1)
