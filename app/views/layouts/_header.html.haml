@@ -15,6 +15,10 @@
           %ul.dropdown
             %li= link_to "All", auctions_path
             %li= link_to "New", new_auction_path
+        %li.has-dropdown
+          %a Conversations
+          %ul.dropdown
+            %li= link_to "Read", conversations_path
         %li= link_to "Sign out", signout_path, method: 'delete'
       - else
         %li= link_to "Sign in", signin_path

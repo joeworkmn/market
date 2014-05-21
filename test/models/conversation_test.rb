@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class ConversationTest < ActiveSupport::TestCase
-   should belong_to(:creator)
-   should have_many(:messages)
-   should have_many(:user_conversations)
-   should have_many(:participants)
+   describe "Conversation" do
+      should belong_to(:creator)
+      should have_many(:messages)
+      should have_many(:user_conversations)
+      should have_many(:participants).through(:user_conversations).source(:user)
+   end
 end
