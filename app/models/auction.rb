@@ -18,6 +18,8 @@ class Auction < ActiveRecord::Base
    has_many :bids, dependent: :destroy
    belongs_to :owner, class_name: "User", foreign_key: "user_id"
 
+   default_scope -> { order("created_at DESC") }
+
    validates :title, presence: true
    validates :end_date, presence: true
    validates :bid_increment, numericality: true, allow_blank: true
@@ -25,7 +27,8 @@ class Auction < ActiveRecord::Base
    validates :buy_out, numericality: true, allow_blank: true
    validate  :buy_out_must_be_more_than_start_bid
 
-   default_scope -> { order("created_at DESC") }
+   after_find :close_if_past_end_date
+
 
    # checks only persisted bids.
    def has_bids?
@@ -58,12 +61,20 @@ class Auction < ActiveRecord::Base
    end
 
 
+
    private
 
    # validation
    def buy_out_must_be_more_than_start_bid
       if buy_out <= start_bid
          errors.add(:buy_out, "must be greater than the starting bid")
+      end
+   end
+
+   def close_if_past_end_date
+      if Time.now >= end_date && active?
+         close
+         save
       end
    end
 end

@@ -20,8 +20,10 @@ class Bid < ActiveRecord::Base
    validate  :must_be_at_least_start_bid_amount
    validate  :must_meet_the_bid_increment
 
+   before_save :block_if_past_end_date
    before_save :block_unless_auction_active
    before_save :handle_buyouts
+
 
 
    private
@@ -41,6 +43,10 @@ class Bid < ActiveRecord::Base
 
    def block_unless_auction_active
       return false unless self.auction.active?
+   end
+
+   def block_if_past_end_date
+      return false if Time.now >= auction.end_date
    end
 
    def handle_buyouts

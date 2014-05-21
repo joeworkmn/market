@@ -21,6 +21,12 @@ class BidTest < ActiveSupport::TestCase
       bid.wont_be(:valid?)
    end
 
+   test "block_if_past_end_date" do
+      auction = create(:auction, end_date: 1.days.ago)
+      bid = build(:bid, auction: auction)
+      bid.save.must_equal(false)
+   end
+
    test "block_unless_auction_active" do
       bid = build(:bid)
       bid.auction.close

@@ -39,5 +39,10 @@ class AuctionTest < ActiveSupport::TestCase
      auction.buy_out = auction.start_bid - 1
      auction.wont_be(:valid?)
   end
+
+  test "close_if_past_end_date" do
+     auction = create(:auction, end_date: Time.now).reload
+     auction.wont_be(:active?)
+  end
   
 end
