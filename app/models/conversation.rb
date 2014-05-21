@@ -14,4 +14,7 @@ class Conversation < ActiveRecord::Base
    has_many   :messages, class_name:  "ConversationMessage"
    has_many   :user_conversations
    has_many   :participants, through: :user_conversations, source: :user
+
+   scope :created_by, ->(user) { where(user_id: user.id) }
+
 end

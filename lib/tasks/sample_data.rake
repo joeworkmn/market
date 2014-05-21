@@ -23,6 +23,7 @@ def make_users
 end
 
 def make_auctions
+   Auction.destroy_all
    user = User.find_by(username: "jdoe")
    10.times do |n|
       user.auctions.create(title: "auction #{n}", start_bid: 50, buy_out: 100, bid_increment: 10, end_date: 5.days.from_now)
@@ -35,6 +36,4 @@ def make_conversations
    5.times do |n|
       user.created_conversations.create(title: "convo #{n}")
    end
-end
-
 end
