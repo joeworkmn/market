@@ -12,9 +12,18 @@
 class Conversation < ActiveRecord::Base
    belongs_to :creator, class_name: "User", foreign_key: "user_id"
    has_many   :messages, class_name:  "ConversationMessage"
-   has_many   :user_conversations
-   has_many   :participants, through: :user_conversations, source: :user
+   has_many   :participations, class_name: "UserConversation", foreign_key: "conversation_id"
+   has_many   :participants, through: :participations, source: :user
 
    scope :created_by, ->(user) { where(user_id: user.id) }
 
+   after_save :add_creator_as_participant
+
+
+   private
+
+   def add_creator_as_participant
+      participations.create(user_id: creator.id)
+   end
+   
 end

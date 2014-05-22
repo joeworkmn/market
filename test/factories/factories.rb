@@ -3,6 +3,14 @@ class MiniTest::Unit::TestCase
 end
 
 FactoryGirl.define do
+   factory :user do
+      fname                 { Faker::Name::first_name }
+      lname                 { Faker::Name::last_name }
+      sequence(:username)   { |n| "user#{n}" } 
+      password              'password'
+      password_confirmation 'password'
+   end
+
    factory :auction do
       sequence(:title) { |n| "auction#{n}" }
       start_bid     50
@@ -19,7 +27,6 @@ FactoryGirl.define do
 
    end
 
-
    factory :bid do
       amount 50
       association :auction
@@ -35,14 +42,11 @@ FactoryGirl.define do
 
    end
 
-
-   factory :user do
-      fname                 { Faker::Name::first_name }
-      lname                 { Faker::Name::last_name }
-      sequence(:username)   { |n| "user#{n}" } 
-      password              'password'
-      password_confirmation 'password'
+   factory :conversation do
+      sequence(:title) { |n| "convo #{n}" }
+      association :creator, factory: :user
    end
+
 
 end
 
