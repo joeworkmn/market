@@ -15,9 +15,18 @@ class Conversation < ActiveRecord::Base
    has_many   :participations, class_name: "UserConversation", foreign_key: "conversation_id"
    has_many   :participants, through: :participations, source: :user
 
-   scope :created_by, ->(user) { where(user_id: user.id) }
+   validates :title, presence: true
+   validates :user_id, presence: true
 
    after_save :add_creator_as_participant
+
+   scope :created_by, ->(user) { where(user_id: user.id) }
+
+
+
+   def latest_message
+      messages.any? ? messages.last.text : nil
+   end
 
 
    private

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
    has_many :user_conversations
    has_many :conversations, through: :user_conversations, source: :conversation
    has_many :created_conversations, class_name: "Conversation", foreign_key: "user_id"
+   has_many :conversation_messages
 
    has_secure_password
 

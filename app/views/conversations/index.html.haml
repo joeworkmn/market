@@ -3,22 +3,5 @@
 %h3.subheader.text-center
   Conversations
 
-%dl.tabs{:data => {:tab => true}}
-  %dd.active
-    %a{:href => "#all-conversations"}
-      All
-  %dd
-    %a{:href => "#created-conversations"}
-      Created
-  %dd
-    %a{:href => "#conversations-part-of"}
-      Part of
-
-
-.tabs-content
-  .content.active#all-conversations
-    All
-  .content#created-conversations
-    Created
-  .content#conversations-part-of
-    Part of
+%ul.collection-list
+  = render @conversations

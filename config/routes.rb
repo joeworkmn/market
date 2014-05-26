@@ -1,17 +1,17 @@
 Market::Application.routes.draw do
-  resources :conversation_messages
 
-  resources :conversations
+  get '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
   resources :users
   resources :auctions do
-     get 'buyout', on: :member
      resources :bids
   end
   resources :sessions, only: [:new, :create, :destroy]
 
-  get '/signin', to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: 'delete'
+  resources :conversations do
+     resources :conversation_messages, as: "messages"
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

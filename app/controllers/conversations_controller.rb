@@ -1,7 +1,20 @@
 class ConversationsController < ApplicationController
    def index
-      @created_conversations = current_user.created_conversations 
-      @conversations_part_of = current_user.conversations_part_of 
-      @conversations = (@created_conversations + @conversations_part_of).sort_by(&:updated_at)
+      @conversations = current_user.conversations.includes(:messages)
+   end
+
+   def show
+      @messages = conversation.messages.includes(:user)
+      @message = ConversationMessage.new
+   end
+
+   def create
+   end
+
+
+   private
+
+   def conversation
+      @conversation ||= Conversation.find_by(id: params[:id])
    end
 end

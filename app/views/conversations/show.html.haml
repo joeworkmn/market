@@ -1,0 +1,10 @@
+.row
+  .large-7.columns
+    %h3.subheader.text-center
+      Messages
+    %ul.collection-list
+      = render @messages
+  .large-5.columns
+    = simple_form_for @message, url: conversation_messages_path(@conversation) do |f|
+      = f.input :text, label: "New Message", as: :text
+      = f.submit "Submit", class: "button small success"
