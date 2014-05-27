@@ -10,7 +10,6 @@
 #  buy_out       :decimal(, )
 #
 class AuctionsController < ApplicationController
-
    before_action :must_be_signed_in, except: [:index, :show]
    before_action :must_be_auction_owner, only: [:edit, :update, :destroy]
 

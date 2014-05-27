@@ -1,10 +1,7 @@
 class BidsController < ApplicationController
+   before_action :must_be_signed_in
 
    def create
-      #bid_handler = BidHandler.new
-      #@auction = bid_handler.run(current_user, params)
-      #@bid = bid_handler.bid
-      
       @bid = auction.bids.build(amount: params[:bid][:amount], user_id: current_user.id)
 
       if @bid.save

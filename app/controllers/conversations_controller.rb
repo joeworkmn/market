@@ -1,4 +1,6 @@
 class ConversationsController < ApplicationController
+   before_action :must_be_signed_in
+
    def index
       @conversations = current_user.conversations.includes(:messages)
    end
