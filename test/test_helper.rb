@@ -9,6 +9,9 @@ Capybara.javascript_driver = :poltergeist
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
+  # Require additional custom helpers.
+  Dir[Rails.root.join("test/support/**/*.rb")].each {|f| require f}
+
   # Add more helper methods to be used by all tests here...
 end
 

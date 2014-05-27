@@ -30,6 +30,10 @@ class Auction < ActiveRecord::Base
    after_find :close_if_past_end_date
 
 
+   def end_date_r
+      end_date.to_formatted_s(:long) unless end_date.nil?
+   end
+
    # checks only persisted bids.
    def has_bids?
       bids.delete_if { |b| b.new_record? }.any?

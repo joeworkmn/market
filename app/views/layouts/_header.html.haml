@@ -9,12 +9,12 @@
 
   %section.top-bar-section
     %ul.right
+      %li.has-dropdown
+        %a Auctions
+        %ul.dropdown
+          %li= link_to "All", auctions_path
+          %li= link_to "New", new_auction_path if signed_in?
       - if signed_in?
-        %li.has-dropdown
-          %a Auctions
-          %ul.dropdown
-            %li= link_to "All", auctions_path
-            %li= link_to "New", new_auction_path
         %li.has-dropdown
           %a Conversations
           %ul.dropdown
