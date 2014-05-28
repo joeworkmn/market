@@ -10,6 +10,10 @@ class ConversationsController < ApplicationController
       @message = ConversationMessage.new
    end
 
+   def new
+      @conversation = Conversation.new
+   end
+
    def create
    end
 

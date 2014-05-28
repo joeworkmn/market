@@ -25,7 +25,7 @@ class Conversation < ActiveRecord::Base
 
 
    def latest_message
-      messages.any? ? messages.last.text : nil
+      messages.last.text if messages.any?
    end
 
 
