@@ -29,6 +29,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'validates_timeliness', '~> 3.0'
 gem 'will_paginate', '~> 3.0'
 
+gem 'rails_12factor', group: :production
+
 group :development do
    gem 'annotate', ">=2.5.0"
    gem 'better_errors'
