@@ -1,4 +1,5 @@
 Market::Application.routes.draw do
+  root to: 'sessions#new'
 
   get '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: 'delete'
