@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: market
   pool: 5
-  username: joseph
+  #username: joseph
   password: batman
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: market_test
   pool: 5
-  username: joseph
+  #username: joseph
   password: batman
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: market
   pool: 5
-  username: joseph
+  #username: joseph
   password: batman
